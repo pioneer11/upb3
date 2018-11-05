@@ -51,7 +51,7 @@ public class FileDecryptHandler extends HttpServlet {
 
 				key = CryptoUtils.readKeyFile(UPLOAD_DIRECTORY + File.separator + "key.txt");
 
-				KeyPair encKey = Asymmetric_encryption.do_RSA(key);
+				String encKey = Asymmetric_encryption.do_RSA(key);
 
 				int size_of_key = encKey.length();
 				Path path = Paths.get(UPLOAD_DIRECTORY + File.separator + "encrypted.txt");
@@ -77,7 +77,7 @@ public class FileDecryptHandler extends HttpServlet {
 				response.setContentType("text/plain");
 
 				OutputStream out = response.getOutputStream();
-				FileInputStream in = new FileInputStream(UPLOAD_DIRECTORY + File.separator + "tmp.txt");
+				FileInputStream in = new FileInputStream(UPLOAD_DIRECTORY + File.separator + "decrypted.txt");
 				byte[] buffer2 = new byte[4096];
 				int length;
 				while ((length = in.read(buffer2)) > 0) {

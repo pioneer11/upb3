@@ -9,21 +9,17 @@
  
     <body> 
         <div>
-        	<form action="upload" method="post" enctype="multipart/form-data">
-                <br> <br>
-                <input type="submit" value="Generate key"/>
-            </form>
             <h3> Choose File to Upload in Server </h3>
             <form action="upload" method="post" enctype="multipart/form-data">
                 File: <input type="file" name="file" />
                 <br> <br>
-                <input type="submit" value="upload" />
+                <input type="submit" value="Upload" />
             </form> 
             <br> <br>          
             <form action="decrypt" method="post" enctype="multipart/form-data">
             	File: <input type="file" name="file" />
                 <br> <br>
-                <input type="submit" value="decrypt" />
+                <input type="submit" value="Decrypt" />
             </form>
         </div>
       

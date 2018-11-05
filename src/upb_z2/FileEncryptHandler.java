@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.security.KeyPair;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +48,7 @@ public class FileEncryptHandler extends HttpServlet {
                 CryptoUtils.encrypt(key, temp, encrypted);
                 
                 //add rsa key
-                KeyPair encKey = Asymmetric_encryption.do_RSA(key);
-                
+                String encKey = Asymmetric_encryption.do_RSA(key);
                 Files.write(Paths.get(UPLOAD_DIRECTORY + File.separator + "encrypted.txt"), encKey.getBytes(), StandardOpenOption.APPEND);
            
                //File uploaded successfully
