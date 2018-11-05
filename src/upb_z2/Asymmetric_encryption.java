@@ -15,13 +15,9 @@ import javax.crypto.NoSuchPaddingException;
 
 import org.apache.commons.codec.binary.Base64;
 
-/**
- *
- * @author Kristina
- */
 public class Asymmetric_encryption {
     
-  public static String do_RSA(String key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
+  public static KeyPair do_RSA(String key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
   KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
   keyPairGenerator.initialize(1024);
   KeyPair keyPair = keyPairGenerator.generateKeyPair();
@@ -44,7 +40,7 @@ public class Asymmetric_encryption {
   dipher.init(Cipher.DECRYPT_MODE, privateKey);
   System.out.println("Decrypted key: " + new String(dipher.doFinal(Base64.decodeBase64(encryptedData))));
   
-  return encryptedData;
+  return new KeyPair(publicKey, privateKey);
   }
   
 }

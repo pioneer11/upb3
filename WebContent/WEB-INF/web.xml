@@ -4,11 +4,19 @@
 	
 	   <servlet>
 	        <servlet-name>example</servlet-name>
-	        <servlet-class>upb_z2.FileUploadHandler</servlet-class>
+	        <servlet-class>upb_z2.FileEncryptHandler</servlet-class>
 	    </servlet>
 	    <servlet-mapping>
 	        <servlet-name>example</servlet-name>
 	        <url-pattern>/upload</url-pattern>
+	    </servlet-mapping>
+	     <servlet>
+	        <servlet-name>dec</servlet-name>
+	        <servlet-class>upb_z2.FileDecryptHandler</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	        <servlet-name>dec</servlet-name>
+	        <url-pattern>/decrypt</url-pattern>
 	    </servlet-mapping>
 	  
 	  

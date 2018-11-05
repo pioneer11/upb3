@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.security.KeyPair;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +17,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-public class FileUploadHandler2 extends HttpServlet {
+public class FileEncryptHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String UPLOAD_DIRECTORY = "C:/uploads";
 	  
@@ -26,27 +30,32 @@ public class FileUploadHandler2 extends HttpServlet {
               
                 File temp = null;
                 File encrypted = null;
-                String key = null;
+                String key = CryptoUtils.generateKey();
                 
                 for(FileItem item : multiparts){
                     if(!item.isFormField()){
                         String name = new File(item.getName()).getName();
                         temp = new File(UPLOAD_DIRECTORY + File.separator + name);
                         item.write(temp);
-                        encrypted = new File(UPLOAD_DIRECTORY + File.separator + name + ".enc");
+                        encrypted = new File(UPLOAD_DIRECTORY + File.separator + "encrypted.txt");
                     }
-                    else {
-                    	if(item.getFieldName().equals("fname")) {
-                    		key = item.getString();
-                    	}
-                    }
+//                    else {
+//                    	if(item.getFieldName().equals("fname")) {
+//                    		key = item.getString();
+//                    	}
+//                    }
                 }
 //                String key = "";
                 CryptoUtils.encrypt(key, temp, encrypted);
+                
+                //add rsa key
+                KeyPair encKey = Asymmetric_encryption.do_RSA(key);
+                
+                Files.write(Paths.get(UPLOAD_DIRECTORY + File.separator + "encrypted.txt"), encKey.getBytes(), StandardOpenOption.APPEND);
            
                //File uploaded successfully
                 response.setContentType("text/plain");
-//                
+                
                 OutputStream out = response.getOutputStream();
                 FileInputStream in = new FileInputStream(encrypted);
                 byte[] buffer = new byte[4096];
@@ -56,6 +65,8 @@ public class FileUploadHandler2 extends HttpServlet {
                 }
                 in.close();
                 out.flush();
+                
+                CryptoUtils.writeKeyFile(UPLOAD_DIRECTORY + File.separator + "key.txt", key);
                 
                request.setAttribute("message", "File Uploaded Successfully");
             } catch (Exception ex) {
