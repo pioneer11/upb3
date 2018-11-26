@@ -29,7 +29,7 @@ public class Asymmetric_encryption {
 	  PrivateKey privateKey = keyPair.getPrivate();
 	  PublicKey publicKey = keyPair.getPublic();
 	  
-	  String dataToBeEncrypted = key;   //tu by mal ist ten nahodne vygenerovany kluc, co je v key.txt
+	  String dataToBeEncrypted = key; 
 	
 	  Cipher cipher = Cipher.getInstance("RSA");
 	
@@ -40,11 +40,11 @@ public class Asymmetric_encryption {
 	  Cipher dipher = Cipher.getInstance("RSA");
 	
 	      System.out.println("Public key: " + publicKey);
-	      System.out.println("Priate key: " + privateKey);
+	      System.out.println("Private key: " + privateKey);
 	      
 	  dipher.init(Cipher.DECRYPT_MODE, privateKey);
 	  System.out.println("Decrypted key: " + new String(dipher.doFinal(Base64.decodeBase64(encryptedData))));
-	  SaveKeyPair("C:/uploads", keyPair);
+	  SaveKeyPair("/usr/local/apache-tomcat-9.0.12/uploads", keyPair);
 	  return encryptedData;
   }
   

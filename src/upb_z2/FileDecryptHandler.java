@@ -21,7 +21,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class FileDecryptHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "C:/uploads";
+//	private final String UPLOAD_DIRECTORY = "C:/uploads";
+	private final String UPLOAD_DIRECTORY = "/usr/local/apache-tomcat-9.0.12/uploads";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

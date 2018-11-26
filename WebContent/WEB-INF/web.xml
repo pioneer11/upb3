@@ -3,19 +3,19 @@
 	<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
 	   <servlet>
-	        <servlet-name>example</servlet-name>
+	        <servlet-name>upload</servlet-name>
 	        <servlet-class>upb_z2.FileEncryptHandler</servlet-class>
 	    </servlet>
 	    <servlet-mapping>
-	        <servlet-name>example</servlet-name>
+	        <servlet-name>upload</servlet-name>
 	        <url-pattern>/upload</url-pattern>
 	    </servlet-mapping>
 	     <servlet>
-	        <servlet-name>dec</servlet-name>
+	        <servlet-name>decrypt</servlet-name>
 	        <servlet-class>upb_z2.FileDecryptHandler</servlet-class>
 	    </servlet>
 	    <servlet-mapping>
-	        <servlet-name>dec</servlet-name>
+	        <servlet-name>decrypt</servlet-name>
 	        <url-pattern>/decrypt</url-pattern>
 	    </servlet-mapping>
 	  
